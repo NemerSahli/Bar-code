@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bar Code Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="JsBarcode.all.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+
+    <style>
+    svg{
+        height: 100px;
+        display: block;
+    }
+    .center{
+        position: relative;
+        display: block;
+        margin:10px auto;
+    }
+    input{
+        margin-top:10px;
+        width: 300px;;
+    }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <input class="center" id="input-code-id" type="text" value="5b910f85fa682589bb1c7e5c">
+        <svg class="center" id="barcode1"></svg>
+    </div>
+    <script>
+        let inputCode = $('#input-code-id').val();
+        generateBarCode(inputCode);
+        $('#input-code-id').on('keyup',(e)=>{
+            e.preventDefault();
+            inputCode = $('#input-code-id').val();
+            if(inputCode !== ""){
+                console.log(inputCode);
+                generateBarCode(inputCode);
+            }
+        });
+        function generateBarCode(inputCode){
+            JsBarcode("#barcode1", inputCode, {
+                    // format: "",
+                    // lineColor: "#04f",
+                    width: 1.2,
+                    height: 60,
+                    displayValue: false,
+                    background: "#dddddd",
+            });
+        }
+    </script>
+</body>
+</html>
